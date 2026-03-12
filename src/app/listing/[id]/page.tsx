@@ -18,7 +18,7 @@ interface Listing {
 
 export default function ListingDetail() {
   const { id } = useParams();
-  const router = useRouter(); // වෙන පිටුවකට යවන්න මේක ඕනේ
+  const router = useRouter(); // send another page
   const { data: session } = useSession();
   const [listing, setListing] = useState<Listing | null>(null);
   const [loading, setLoading] = useState(true);
@@ -40,7 +40,7 @@ export default function ListingDetail() {
     if (id) fetchListing();
   }, [id]);
 
-  // පෝස්ට් එක මකන Function එක
+  // delete post function
   const handleDelete = async () => {
     const confirmed = confirm("Are you sure you want to delete this listing?");
     
@@ -51,7 +51,7 @@ export default function ListingDetail() {
         });
 
         if (res.ok) {
-          router.push("/"); // මැකුවට පස්සේ මුල් පිටුවට යවනවා
+          router.push("/"); // send to the home page after deletion
         } else {
           alert("Failed to delete listing");
         }
@@ -81,7 +81,8 @@ export default function ListingDetail() {
                 <span className="bg-green-100 text-green-800 text-xl font-bold px-4 py-2 rounded-lg">${listing.price}</span>
               )}
               
-              {/* තමන් දාපු පෝස්ට් එකක් නම් Edit සහ Delete බට්න් දෙකම පෙන්වනවා */}
+              {/* If it's a post you've made, both the Edit and Delete buttons are displayed.*/}
+              
               {session?.user?.name === listing.creatorName && (
                 <>
                   <Link href={`/edit/${listing._id}`} className="bg-yellow-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-yellow-600 transition">

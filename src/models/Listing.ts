@@ -6,11 +6,11 @@ const listingSchema = new Schema(
     location: { type: String, required: true },
     imageUrl: { type: String, required: true },
     description: { type: String, required: true },
-    price: { type: Number }, // Challenge එකේ විදිහට Price එක Optional (අනිවාර්ය නෑ)
-    creator: { type: Schema.Types.ObjectId, ref: "User", required: true }, // මේක හැදුව User ගේ ID එක
-    creatorName: { type: String, required: true }, // ලේසියට User ගේ නමත් මෙතනම සේව් කරනවා
+    price: { type: Number },  
+    creator: { type: Schema.Types.ObjectId, ref: "User", required: true },  
+    creatorName: { type: String, required: true }, 
   },
-  { timestamps: true } // මේකෙන් ඔටෝම පෝස්ට් එක දාපු වෙලාව (createdAt) හැදෙනවා
+  { timestamps: true } // Automatically creates the time the post was posted (createdAt)
 );
 
 const Listing = models.Listing || mongoose.model("Listing", listingSchema);

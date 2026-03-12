@@ -15,7 +15,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      // NextAuth එකේ signIn function එක පාවිච්චි කරලා ලොග් වෙනවා
+      // Log in using the signIn function in NextAuth.
       const res = await signIn("credentials", {
         email,
         password,
@@ -27,7 +27,7 @@ export default function Login() {
         return;
       }
 
-      // ලොගින් වුණාට පස්සේ ප්‍රධාන පිටුවට (Home) යවනවා
+      // After logging in, redirect to the home page
       router.replace("/");
     } catch (error) {
       console.log(error);

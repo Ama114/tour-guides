@@ -13,13 +13,13 @@ export async function POST(req: Request) {
 
     await connectToDatabase();
 
-    // පෝස්ට් එක දාන කෙනාගේ Email එකෙන් එයාගේ විස්තර හොයාගන්නවා
+    //  
     const user = await User.findOne({ email: creatorEmail });
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    // අලුත් පෝස්ට් එක ඩේටාබේස් එකේ සේව් කරනවා
+    // ave the new post in database
     const newListing = await Listing.create({
       title,
       location,
@@ -41,7 +41,8 @@ export async function POST(req: Request) {
 export async function GET() {
   try {
     await connectToDatabase();
-    // createdAt: -1 කියන්නේ අලුත්ම ඒවා මුලින් එන්න (Newest to oldest) sort කරනවා
+    
+    // sorted from newest to oldest.
     const listings = await Listing.find().sort({ createdAt: -1 });
     
     return NextResponse.json(listings, { status: 200 });

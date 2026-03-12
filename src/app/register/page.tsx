@@ -36,7 +36,7 @@ export default function Register() {
       if (res.ok) {
         const form = e.target as HTMLFormElement;
         form.reset();
-        router.push("/login"); // රෙජිස්ටර් වුණාට පස්සේ ලොගින් එකට යවනවා
+        router.push("/login"); // After registering, you will be sent to the login page.
       } else {
         const { message } = await res.json();
         setError(message);

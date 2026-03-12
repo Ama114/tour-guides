@@ -15,7 +15,7 @@ export default function CreateListing() {
   const [price, setPrice] = useState("");
   const [error, setError] = useState("");
 
-  // කවුරුහරි ලොග් වෙලා නැත්නම් ඔටෝම ලොගින් එකට යවනවා
+  // If someone is not logged in, they will automatically be sent to login.
   if (status === "unauthenticated") {
     router.replace("/login");
     return null;
@@ -39,12 +39,12 @@ export default function CreateListing() {
           imageUrl,
           description,
           price,
-          creatorEmail: session?.user?.email, // ලොග් වෙලා ඉන්න කෙනාගේ ඊමේල් එක යවනවා
+          creatorEmail: session?.user?.email, // Sending the logged-in user's email
         }),
       });
 
       if (res.ok) {
-        router.push("/"); // පෝස්ට් එක දැම්මට පස්සේ මුල් පිටුවට යවනවා
+        router.push("/"); // send to the home page after creating the listing
       } else {
         const data = await res.json();
         setError(data.message || "Failed to create listing.");

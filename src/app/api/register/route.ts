@@ -13,16 +13,16 @@ export async function POST(req: Request) {
 
     await connectToDatabase();
 
-    // ඊමේල් එක දැනටමත් තියෙනවද කියලා බලනවා
+    // Checking if the email already exists.
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json({ message: "Email already exists." }, { status: 400 });
     }
 
-    // පාස්වර්ඩ් එක hash කරනවා (සෙකියුරිටි එකට)
+    // The password is hashed (for security).
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // අලුත් User ව ඩේටාබේස් එකේ සේව් කරනවා
+    // Create the new user in the database.
     await User.create({
       name,
       email,

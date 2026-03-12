@@ -14,7 +14,7 @@ export default function Navbar() {
         </Link>
         
         <div className="flex gap-4 items-center">
-          {/* යූසර් ලොග් වෙලා නම් පේන ටික */}
+          {/* What you see if the user is logged in */}
           {session?.user ? (
             <>
               <span className="font-semibold text-sm hidden md:block">
@@ -34,7 +34,7 @@ export default function Navbar() {
               </button>
             </>
           ) : (
-            /* යූසර් ලොග් වෙලා නැත්නම් පේන ටික */
+            /* What you see if the user is not logged in */
             <>
               <Link href="/login" className="hover:underline font-semibold mt-1">
                 Login

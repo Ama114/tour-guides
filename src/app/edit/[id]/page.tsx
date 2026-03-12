@@ -15,7 +15,7 @@ export default function EditListing() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // පිටුවට එද්දිම පරණ විස්තර ටික අරගෙන ෆෝම් එකට පුරවනවා
+  // As soon as you get to the page, you take the old details and fill them in the form.
   useEffect(() => {
     const fetchListing = async () => {
       try {
@@ -45,7 +45,7 @@ export default function EditListing() {
     }
 
     try {
-      // අප්ඩේට් කරන API එකට ඩේටා යවනවා
+      // Update the listing via the API
       const res = await fetch(`/api/listings/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -53,7 +53,7 @@ export default function EditListing() {
       });
 
       if (res.ok) {
-        router.push(`/listing/${id}`); // අප්ඩේට් කළාට පස්සේ ආයෙත් විස්තර පිටුවට යවනවා
+        router.push(`/listing/${id}`); // After updating, redirect to the listing page
       } else {
         setError("Failed to update listing.");
       }

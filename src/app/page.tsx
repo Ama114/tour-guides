@@ -18,7 +18,7 @@ export default function Home() {
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
   
-  // Search කරන වචනේ සේව් කරගන්න අලුත් State එක
+  //Save the search term to a new state.
   const [searchTerm, setSearchTerm] = useState(""); 
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function Home() {
     return `${Math.floor(diffInSeconds / 86400)} days ago`;
   };
 
-  // ඩේටාබේස් එකෙන් ආපු පෝස්ට් වලින්, අපි ටයිප් කරන වචනේ තියෙන ඒවා විතරක් පෙරාගන්නවා
+  // Filter listings based on the search term
   const filteredListings = listings.filter((listing) =>
     listing.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     listing.location.toLowerCase().includes(searchTerm.toLowerCase())
@@ -59,7 +59,7 @@ export default function Home() {
     <div className="container mx-auto p-6 mt-4">
       <h1 className="text-3xl font-bold mb-6 text-gray-800 text-center">Explore Local Experiences</h1>
       
-      {/* අලුතින් දාපු Search Bar එක */}
+      {/* Search Bar */}
       <div className="max-w-xl mx-auto mb-10">
         <input
           type="text"
