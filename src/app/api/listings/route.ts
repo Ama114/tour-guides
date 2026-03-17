@@ -5,21 +5,23 @@ import User from "@/models/User";
 
 export async function POST(req: Request) {
   try {
+    // Extract all data sent from the frontend request body
     const { title, location, imageUrl, description, price, creatorEmail } = await req.json();
 
+    // Validate if all required fields are provided
     if (!title || !location || !imageUrl || !description || !creatorEmail) {
       return NextResponse.json({ message: "Missing required fields" }, { status: 400 });
     }
 
     await connectToDatabase();
 
-    //  
+    // Find the user in the database to link them to this listing
     const user = await User.findOne({ email: creatorEmail });
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    // ave the new post in database
+    // Create and save the new listing in the database
     const newListing = await Listing.create({
       title,
       location,
@@ -28,6 +30,7 @@ export async function POST(req: Request) {
       price: price ? Number(price) : 0,
       creator: user._id,
       creatorName: user.name,
+      creatorEmail: creatorEmail, // Added the missing field required by the database schema
     });
 
     return NextResponse.json({ message: "Listing created successfully" }, { status: 201 });
@@ -37,12 +40,11 @@ export async function POST(req: Request) {
   }
 }
 
-
 export async function GET() {
   try {
     await connectToDatabase();
     
-    // sorted from newest to oldest.
+    // Fetch all listings and sort them from newest to oldest
     const listings = await Listing.find().sort({ createdAt: -1 });
     
     return NextResponse.json(listings, { status: 200 });
