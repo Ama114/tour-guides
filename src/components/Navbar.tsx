@@ -32,6 +32,17 @@ export default function Navbar() {
               >
                 Logout
               </button>
+
+              {/* Only show the Favorites link if the user is logged in (session exists) */}
+{session?.user && (
+  <Link 
+    href="/favorites" 
+    className="flex items-center gap-1 text-gray-700 hover:text-red-500 font-bold px-3 py-2 rounded-md transition-colors"
+  >
+    My Favorites ❤️
+  </Link>
+)}
+
             </>
           ) : (
             /* What you see if the user is not logged in */
